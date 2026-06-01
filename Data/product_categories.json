@@ -1,0 +1,149 @@
+{
+  "Bebidas": {
+    "types": [
+      "Refrigerante",
+      "Suco",
+      "Água",
+      "Energético",
+      "Chá",
+      "Café",
+      "Cerveja",
+      "Vinho",
+      "Whisky",
+      "Vodka",
+      "Licor"
+    ],
+    "packages": [
+      "Lata",
+      "Garrafa PET",
+      "Garrafa Vidro",
+      "Caixa",
+      "Barril"
+    ],
+    "sizes": [
+      "269ml",
+      "350ml",
+      "473ml",
+      "600ml",
+      "1L",
+      "1.5L",
+      "2L",
+      "5L"
+    ]
+  },
+
+  "Alimentos": {
+    "types": [
+      "Bolacha",
+      "Chocolate",
+      "Macarrão",
+      "Arroz",
+      "Feijão",
+      "Pão",
+      "Bolo",
+      "Pizza",
+      "Sorvete",
+      "Iogurte",
+      "Queijo",
+      "Hambúrguer",
+      "Salgadinho",
+      "Cereal"
+    ],
+    "packages": [
+      "Pacote",
+      "Caixa",
+      "Bandeja",
+      "Pote",
+      "Saco"
+    ],
+    "sizes": [
+      "100g",
+      "250g",
+      "500g",
+      "750g",
+      "1kg",
+      "2kg",
+      "5kg"
+    ]
+  },
+
+  "Tecnologia": {
+    "types": [
+      "Celular",
+      "Smartphone",
+      "Notebook",
+      "Desktop",
+      "Tablet",
+      "Console",
+      "Smartwatch",
+      "Monitor",
+      "Televisão",
+      "Fone de Ouvido",
+      "Caixa de Som",
+      "Câmera"
+    ],
+    "packages": [
+      "Caixa"
+    ],
+    "sizes": [
+      "Pequeno",
+      "Médio",
+      "Grande"
+    ]
+  },
+
+  "Moda": {
+    "types": [
+      "Camiseta",
+      "Camisa",
+      "Calça",
+      "Bermuda",
+      "Jaqueta",
+      "Moletom",
+      "Tênis",
+      "Sapato",
+      "Boné",
+      "Relógio",
+      "Óculos",
+      "Mochila"
+    ],
+    "packages": [
+      "Sacola",
+      "Caixa"
+    ],
+    "sizes": [
+      "PP",
+      "P",
+      "M",
+      "G",
+      "GG",
+      "XGG"
+    ]
+  },
+
+  "Automotivo": {
+    "types": [
+      "Hatch",
+      "Sedan",
+      "SUV",
+      "Pickup",
+      "Esportivo",
+      "Moto",
+      "Caminhão",
+      "Ônibus",
+      "Motor",
+      "Pneu",
+      "Bateria"
+    ],
+    "packages": [
+      "Veículo",
+      "Caixa",
+      "Palete"
+    ],
+    "sizes": [
+      "Compacto",
+      "Médio",
+      "Grande"
+    ]
+  }
+}

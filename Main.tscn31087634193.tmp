@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://c5mr7kam8etig"]
+
+[ext_resource type="Script" uid="uid://dw77icwc7h8w6" path="res://Scripts/create_product.gd" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://b6drurppmp4m0" path="res://Scripts/main.gd" id="1_r0du0"]
+[ext_resource type="Script" uid="uid://dp6rl816jeesy" path="res://Scripts/market_screen.gd" id="2_uu6xs"]
+
+[node name="Main" type="Control" unique_id=1390058005]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r0du0")
+
+[node name="TopBar" type="Panel" parent="." unique_id=1325316843]
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 648.0
+
+[node name="Btn_CreateProduct" type="Button" parent="TopBar" unique_id=190655823]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 19.0
+offset_right = 66.0
+offset_bottom = 43.0
+text = "Criar Produto"
+
+[node name="Btn_Market" type="Button" parent="TopBar" unique_id=508151466]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 60.0
+offset_right = 127.0
+offset_bottom = 91.0
+text = "Mercado"
+
+[node name="Screen_CreateProduct" type="Panel" parent="." unique_id=715643342]
+layout_mode = 0
+offset_left = 145.0
+offset_right = 388.0
+offset_bottom = 648.0
+script = ExtResource("1_glv2v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen_CreateProduct" unique_id=819876814]
+layout_mode = 0
+offset_right = 243.0
+offset_bottom = 171.0
+
+[node name="Inp_ProductName" type="LineEdit" parent="Screen_CreateProduct/VBoxContainer" unique_id=398394918]
+layout_mode = 2
+placeholder_text = "Nome do produto"
+alignment = 1
+
+[node name="Dd_Category" type="OptionButton" parent="Screen_CreateProduct/VBoxContainer" unique_id=1872447727]
+layout_mode = 2
+alignment = 1
+item_count = 5
+popup/item_0/text = "Bebidas"
+popup/item_0/id = 0
+popup/item_1/text = "Alimentos"
+popup/item_1/id = 1
+popup/item_2/text = "Tecnologia"
+popup/item_2/id = 2
+popup/item_3/text = "Moda"
+popup/item_3/id = 3
+popup/item_4/text = "Automotivo"
+popup/item_4/id = 4
+
+[node name="Dd_Type" type="OptionButton" parent="Screen_CreateProduct/VBoxContainer" unique_id=166691076]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Refrigerante"
+popup/item_0/id = 0
+popup/item_1/text = "Suco"
+popup/item_1/id = 1
+popup/item_2/text = "Energético"
+popup/item_2/id = 2
+
+[node name="Dd_Package" type="OptionButton" parent="Screen_CreateProduct/VBoxContainer" unique_id=515855060]
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "Lata"
+popup/item_0/id = 0
+popup/item_1/text = "Garrafa"
+popup/item_1/id = 1
+
+[node name="Dd_Size" type="OptionButton" parent="Screen_CreateProduct/VBoxContainer" unique_id=247323795]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "350ml"
+popup/item_0/id = 0
+popup/item_1/text = "600ml"
+popup/item_1/id = 1
+popup/item_2/text = "1L"
+popup/item_2/id = 2
+
+[node name="Btn_Create" type="Button" parent="Screen_CreateProduct/VBoxContainer" unique_id=186333519]
+layout_mode = 2
+text = "Criar Produto"
+
+[node name="Screen_Market" type="Panel" parent="." unique_id=313509222]
+layout_mode = 0
+offset_left = 393.0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("2_uu6xs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen_Market" unique_id=1192110079]
+layout_mode = 0
+offset_right = 759.0
+offset_bottom = 648.0
+
+[node name="ProductList" type="ItemList" parent="Screen_Market/VBoxContainer" unique_id=534065898]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[connection signal="pressed" from="TopBar/Btn_CreateProduct" to="." method="show_create_product"]
+[connection signal="pressed" from="TopBar/Btn_Market" to="." method="show_market"]
+[connection signal="pressed" from="Screen_CreateProduct/VBoxContainer/Btn_Create" to="Screen_CreateProduct" method="_on_btn_create_pressed"]

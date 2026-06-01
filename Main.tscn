@@ -1,0 +1,681 @@
+[gd_scene format=3 uid="uid://c5mr7kam8etig"]
+
+[ext_resource type="Script" uid="uid://dw77icwc7h8w6" path="res://Scripts/create_product.gd" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://b6drurppmp4m0" path="res://Scripts/main.gd" id="1_r0du0"]
+[ext_resource type="Texture2D" uid="uid://c0tutr1388wpq" path="res://Icons/product-idea.png" id="2_fos0i"]
+[ext_resource type="Script" uid="uid://dp6rl816jeesy" path="res://Scripts/market_screen.gd" id="2_uu6xs"]
+[ext_resource type="Texture2D" uid="uid://bdf7hjdo4j118" path="res://Icons/display-market.png" id="3_3dxm6"]
+[ext_resource type="Texture2D" uid="uid://bg6br1guflpwn" path="res://Icons/package.png" id="3_lgr22"]
+[ext_resource type="Texture2D" uid="uid://bltgiqe0yssss" path="res://Icons/brand.png" id="5_lgr22"]
+[ext_resource type="Texture2D" uid="uid://2j6yilwqbbgb" path="res://Icons/research.png" id="6_trn2v"]
+[ext_resource type="Texture2D" uid="uid://bblha72o40qy0" path="res://Icons/marketing.png" id="7_c6i3y"]
+[ext_resource type="Texture2D" uid="uid://dfg0tmeiaf7w6" path="res://Icons/production.png" id="7_wkp8b"]
+[ext_resource type="Texture2D" uid="uid://hrrynmufmge2" path="res://Icons/logistics.png" id="8_20pc6"]
+[ext_resource type="Texture2D" uid="uid://b6gengedsgvqa" path="res://Icons/stock.png" id="9_5vvyt"]
+[ext_resource type="Texture2D" uid="uid://dmso5u8qx26op" path="res://Icons/quality-check.png" id="10_c6i3y"]
+[ext_resource type="Texture2D" uid="uid://ckwle2k8ll006" path="res://Icons/components.png" id="13_c2ibq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fos0i"]
+bg_color = Color(0.09019608, 0.09019608, 0.12941177, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6i3y"]
+bg_color = Color(0.09019608, 0.10980392, 0.12941177, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2ibq"]
+bg_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjvhd"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4qnp"]
+bg_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tuhn"]
+bg_color = Color(0.09019608, 0.10980392, 0.12941177, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpfj3"]
+bg_color = Color(0.09019608, 0.10980392, 0.12941177, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sc1dx"]
+bg_color = Color(0.1754844, 0.20660992, 0.23773544, 0.3764706)
+
+[node name="Main" type="Control" unique_id=1390058005]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r0du0")
+
+[node name="TopBar" type="Panel" parent="." unique_id=1325316843]
+layout_mode = 0
+offset_right = 238.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fos0i")
+
+[node name="BannerLogo" type="Panel" parent="TopBar" unique_id=2044645616]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 238.0
+offset_bottom = 65.0
+
+[node name="Label2" type="Label" parent="TopBar/BannerLogo" unique_id=1709435172]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 237.0
+offset_bottom = 59.0
+text = "Titan's Legacy Banner"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TopBar" unique_id=1393532769]
+layout_mode = 0
+offset_top = 73.0
+offset_right = 238.0
+offset_bottom = 1095.0
+theme_override_constants/separation = 5
+
+[node name="Mg_CreateProduct" type="MarginContainer" parent="TopBar/VBoxContainer" unique_id=417478452]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Btn_CreateProduct" type="Button" parent="TopBar/VBoxContainer/Mg_CreateProduct" unique_id=190655823]
+custom_minimum_size = Vector2(225, 95)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 19
+
+[node name="Panel" type="Panel" parent="TopBar/VBoxContainer/Mg_CreateProduct/Btn_CreateProduct" unique_id=1471994891]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/VBoxContainer/Mg_CreateProduct/Btn_CreateProduct/Panel" unique_id=884374756]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 99.0
+offset_bottom = 92.0
+mouse_filter = 2
+texture = ExtResource("2_fos0i")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="TopBar/VBoxContainer/Mg_CreateProduct/Btn_CreateProduct/Panel" unique_id=1862194963]
+layout_mode = 0
+offset_left = 88.0
+offset_right = 225.0
+offset_bottom = 95.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 14
+text = "Criar Produto"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mg_Product" type="MarginContainer" parent="TopBar/VBoxContainer" unique_id=705603385]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Btn_Product" type="Button" parent="TopBar/VBoxContainer/Mg_Product" unique_id=1168052178]
+custom_minimum_size = Vector2(225, 95)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+
+[node name="Panel" type="Panel" parent="TopBar/VBoxContainer/Mg_Product/Btn_Product" unique_id=1365980719]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/VBoxContainer/Mg_Product/Btn_Product/Panel" unique_id=1592443211]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 11.0
+offset_right = 96.03166
+offset_bottom = 82.93985
+texture = ExtResource("3_lgr22")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="TopBar/VBoxContainer/Mg_Product/Btn_Product/Panel" unique_id=463662548]
+layout_mode = 0
+offset_left = 87.0
+offset_right = 224.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 14
+text = "Produto"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mg_Market" type="MarginContainer" parent="TopBar/VBoxContainer" unique_id=655476916]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Btn_Market" type="Button" parent="TopBar/VBoxContainer/Mg_Market" unique_id=508151466]
+custom_minimum_size = Vector2(225, 95)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+
+[node name="Panel" type="Panel" parent="TopBar/VBoxContainer/Mg_Market/Btn_Market" unique_id=1956218483]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/VBoxContainer/Mg_Market/Btn_Market/Panel" unique_id=867183544]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 99.0
+offset_bottom = 84.0
+texture = ExtResource("3_3dxm6")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="TopBar/VBoxContainer/Mg_Market/Btn_Market/Panel" unique_id=821105080]
+layout_mode = 0
+offset_left = 87.0
+offset_right = 224.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 14
+text = "Mercado"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mg_Brand" type="MarginContainer" parent="TopBar/VBoxContainer" unique_id=11816916]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Btn_Brand" type="Button" parent="TopBar/VBoxContainer/Mg_Brand" unique_id=1032055756]
+custom_minimum_size = Vector2(225, 95)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+
+[node name="Panel" type="Panel" parent="TopBar/VBoxContainer/Mg_Brand/Btn_Brand" unique_id=1175096145]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/VBoxContainer/Mg_Brand/Btn_Brand/Panel" unique_id=1998703940]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 7.0
+offset_right = 90.0
+offset_bottom = 88.0
+texture = ExtResource("5_lgr22")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="TopBar/VBoxContainer/Mg_Brand/Btn_Brand/Panel" unique_id=546472788]
+layout_mode = 0
+offset_left = 87.0
+offset_right = 224.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 14
+text = "Marca"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mg_Production" type="MarginContainer" parent="TopBar/VBoxContainer" unique_id=830878687]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Btn_Production" type="Button" parent="TopBar/VBoxContainer/Mg_Production" unique_id=1300161649]
+custom_minimum_size = Vector2(225, 95)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+
+[node name="Panel" type="Panel" parent="TopBar/VBoxContainer/Mg_Production/Btn_Production" unique_id=1920144426]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/VBoxContainer/Mg_Production/Btn_Production/Panel" unique_id=1650279396]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 11.0
+offset_right = 101.88949
+offset_bottom = 84.0
+texture = ExtResource("7_wkp8b")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="TopBar/VBoxContainer/Mg_Production/Btn_Production/Panel" unique_id=1413069360]
+layout_mode = 0
+offset_left = 87.0
+offset_right = 224.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 14
+text = "Produção"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mg_Marketing" type="MarginContainer" parent="TopBar/VBoxContainer" unique_id=720528511]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Btn_Marketing" type="Button" parent="TopBar/VBoxContainer/Mg_Marketing" unique_id=655960268]
+custom_minimum_size = Vector2(225, 95)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+
+[node name="Panel" type="Panel" parent="TopBar/VBoxContainer/Mg_Marketing/Btn_Marketing" unique_id=1153313402]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/VBoxContainer/Mg_Marketing/Btn_Marketing/Panel" unique_id=1077292520]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 15.0
+offset_right = 89.0
+offset_bottom = 81.0
+texture = ExtResource("7_c6i3y")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="TopBar/VBoxContainer/Mg_Marketing/Btn_Marketing/Panel" unique_id=2061303633]
+layout_mode = 0
+offset_left = 87.0
+offset_right = 224.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 14
+text = "Marketing"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mg_Logistic" type="MarginContainer" parent="TopBar/VBoxContainer" unique_id=1451643018]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Btn_Logistic" type="Button" parent="TopBar/VBoxContainer/Mg_Logistic" unique_id=1856446454]
+custom_minimum_size = Vector2(225, 95)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+
+[node name="Panel" type="Panel" parent="TopBar/VBoxContainer/Mg_Logistic/Btn_Logistic" unique_id=2126653036]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/VBoxContainer/Mg_Logistic/Btn_Logistic/Panel" unique_id=1309112031]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 17.0
+offset_right = 109.19512
+offset_bottom = 73.0
+texture = ExtResource("8_20pc6")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="TopBar/VBoxContainer/Mg_Logistic/Btn_Logistic/Panel" unique_id=167409087]
+layout_mode = 0
+offset_left = 87.0
+offset_right = 224.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 14
+text = "Logística"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mg_Stock" type="MarginContainer" parent="TopBar/VBoxContainer" unique_id=542378535]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Btn_Stock" type="Button" parent="TopBar/VBoxContainer/Mg_Stock" unique_id=704016657]
+custom_minimum_size = Vector2(225, 95)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+
+[node name="Panel" type="Panel" parent="TopBar/VBoxContainer/Mg_Stock/Btn_Stock" unique_id=322850332]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/VBoxContainer/Mg_Stock/Btn_Stock/Panel" unique_id=298912539]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 14.0
+offset_right = 96.0
+offset_bottom = 80.0
+texture = ExtResource("9_5vvyt")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="TopBar/VBoxContainer/Mg_Stock/Btn_Stock/Panel" unique_id=829352905]
+layout_mode = 0
+offset_left = 87.0
+offset_right = 224.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 14
+text = "Estoque"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mg_Quality" type="MarginContainer" parent="TopBar/VBoxContainer" unique_id=1848520249]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Btn_Quality" type="Button" parent="TopBar/VBoxContainer/Mg_Quality" unique_id=1995292344]
+custom_minimum_size = Vector2(225, 95)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+
+[node name="Panel" type="Panel" parent="TopBar/VBoxContainer/Mg_Quality/Btn_Quality" unique_id=933200824]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/VBoxContainer/Mg_Quality/Btn_Quality/Panel" unique_id=1496944463]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 15.0
+offset_right = 89.0
+offset_bottom = 81.0
+texture = ExtResource("10_c6i3y")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="TopBar/VBoxContainer/Mg_Quality/Btn_Quality/Panel" unique_id=921726588]
+layout_mode = 0
+offset_left = 87.0
+offset_right = 224.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 14
+text = "Qualidade"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mg_Research" type="MarginContainer" parent="TopBar/VBoxContainer" unique_id=855045960]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Btn_Research" type="Button" parent="TopBar/VBoxContainer/Mg_Research" unique_id=1293946278]
+custom_minimum_size = Vector2(225, 95)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+
+[node name="Panel" type="Panel" parent="TopBar/VBoxContainer/Mg_Research/Btn_Research" unique_id=2142672242]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopBar/VBoxContainer/Mg_Research/Btn_Research/Panel" unique_id=1960807883]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 95.2407
+offset_bottom = 88.0
+texture = ExtResource("6_trn2v")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="TopBar/VBoxContainer/Mg_Research/Btn_Research/Panel" unique_id=1888074026]
+layout_mode = 0
+offset_left = 87.0
+offset_right = 224.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 14
+text = "Pesquisa"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Screen_CreateProduct" type="Panel" parent="." unique_id=715643342]
+layout_mode = 0
+offset_left = 240.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c6i3y")
+script = ExtResource("1_glv2v")
+
+[node name="Mg_Components" type="MarginContainer" parent="Screen_CreateProduct" unique_id=2051953907]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 333.0
+offset_right = 303.0
+offset_bottom = 428.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Btn_Components" type="Button" parent="Screen_CreateProduct/Mg_Components" unique_id=328764738]
+custom_minimum_size = Vector2(225, 95)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+
+[node name="Panel" type="Panel" parent="Screen_CreateProduct/Mg_Components/Btn_Components" unique_id=1713560040]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 95.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Screen_CreateProduct/Mg_Components/Btn_Components/Panel" unique_id=1250677163]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = 101.0
+offset_bottom = 82.0
+texture = ExtResource("13_c2ibq")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="Screen_CreateProduct/Mg_Components/Btn_Components/Panel" unique_id=318374950]
+layout_mode = 0
+offset_left = 95.0
+offset_right = 228.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 14
+text = "Ingredientes 
+e 
+Compostos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Screen_CreateProduct" unique_id=2087315564]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 11.0
+offset_right = 290.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 25
+text = "Criação de Produtos"
+
+[node name="VBCCriacaoProduto" type="VBoxContainer" parent="Screen_CreateProduct" unique_id=819876814]
+layout_mode = 1
+offset_left = 36.0
+offset_top = 68.0
+offset_right = 326.0
+offset_bottom = 321.0
+
+[node name="Inp_ProductName" type="LineEdit" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=398394918]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_c2ibq")
+placeholder_text = "Nome do produto"
+alignment = 1
+
+[node name="Btn_RandomName" type="Button" parent="Screen_CreateProduct/VBCCriacaoProduto/Inp_ProductName" unique_id=1953169779]
+layout_mode = 1
+offset_left = 290.0
+offset_right = 322.0
+offset_bottom = 31.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_kjvhd")
+text = "🎲"
+
+[node name="Dd_Category" type="OptionButton" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=1872447727]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_c2ibq")
+alignment = 1
+
+[node name="Dd_Type" type="OptionButton" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=166691076]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_c2ibq")
+alignment = 1
+
+[node name="Dd_Package" type="OptionButton" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=515855060]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_c2ibq")
+alignment = 1
+
+[node name="Dd_Size" type="OptionButton" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=247323795]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_c2ibq")
+alignment = 1
+
+[node name="Btn_Create" type="Button" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=186333519]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_j4qnp")
+text = "Criar Produto"
+
+[node name="Label2" type="Label" parent="Screen_CreateProduct" unique_id=953977405]
+layout_mode = 0
+offset_left = 492.0
+offset_top = 11.0
+offset_right = 746.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 25
+text = "Visualização conteúdo do produto:"
+
+[node name="Panel3" type="Panel" parent="Screen_CreateProduct" unique_id=855847090]
+layout_mode = 0
+offset_left = 1083.0
+offset_top = 68.0
+offset_right = 1644.0
+offset_bottom = 428.0
+
+[node name="Panel" type="Panel" parent="Screen_CreateProduct" unique_id=1955852024]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 68.0
+offset_right = 1050.0
+offset_bottom = 428.0
+
+[node name="Label3" type="Label" parent="Screen_CreateProduct" unique_id=390267808]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 467.0
+offset_right = 344.0
+offset_bottom = 507.0
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_font_sizes/font_size = 25
+text = "Ingredientes/Compostos:"
+
+[node name="HBComponents" type="HBoxContainer" parent="Screen_CreateProduct" unique_id=927534154]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 573.0
+offset_right = 356.0
+offset_bottom = 800.0
+
+[node name="VBoxAvailable" type="VBoxContainer" parent="Screen_CreateProduct/HBComponents" unique_id=1336569683]
+layout_mode = 2
+
+[node name="Lbl_Available" type="Label" parent="Screen_CreateProduct/HBComponents/VBoxAvailable" unique_id=2094886310]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+text = "Disponível"
+horizontal_alignment = 1
+
+[node name="ItemList_Available" type="ItemList" parent="Screen_CreateProduct/HBComponents/VBoxAvailable" unique_id=1533371901]
+custom_minimum_size = Vector2(750, 450)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+
+[node name="VBoxButtons" type="VBoxContainer" parent="Screen_CreateProduct/HBComponents" unique_id=415888581]
+layout_mode = 2
+alignment = 1
+
+[node name="Btn_Add" type="Button" parent="Screen_CreateProduct/HBComponents/VBoxButtons" unique_id=1243058614]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+text = "+"
+
+[node name="Btn_Remove" type="Button" parent="Screen_CreateProduct/HBComponents/VBoxButtons" unique_id=769467510]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+text = "-"
+
+[node name="VBoxSelected" type="VBoxContainer" parent="Screen_CreateProduct/HBComponents" unique_id=1909216359]
+layout_mode = 2
+
+[node name="Lbl_Selected" type="Label" parent="Screen_CreateProduct/HBComponents/VBoxSelected" unique_id=1054289563]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+text = "Selecionado"
+horizontal_alignment = 1
+
+[node name="ItemList_Selected" type="ItemList" parent="Screen_CreateProduct/HBComponents/VBoxSelected" unique_id=721264027]
+custom_minimum_size = Vector2(750, 450)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+
+[node name="Screen_Components" type="Panel" parent="." unique_id=1860502143]
+visible = false
+layout_mode = 0
+offset_left = 238.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5tuhn")
+
+[node name="Screen_Market" type="Panel" parent="." unique_id=313509222]
+visible = false
+layout_mode = 0
+offset_left = 238.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fpfj3")
+script = ExtResource("2_uu6xs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen_Market" unique_id=1192110079]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 70.0
+offset_right = 1628.0
+offset_bottom = 1025.0
+
+[node name="ProductList" type="ItemList" parent="Screen_Market/VBoxContainer" unique_id=534065898]
+custom_minimum_size = Vector2(0, 950)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sc1dx")
+
+[connection signal="pressed" from="TopBar/VBoxContainer/Mg_CreateProduct/Btn_CreateProduct" to="." method="show_create_product"]
+[connection signal="pressed" from="TopBar/VBoxContainer/Mg_Market/Btn_Market" to="." method="show_market"]
+[connection signal="pressed" from="Screen_CreateProduct/VBCCriacaoProduto/Inp_ProductName/Btn_RandomName" to="Screen_CreateProduct" method="_on_btn_random_name_pressed"]
+[connection signal="item_selected" from="Screen_CreateProduct/VBCCriacaoProduto/Dd_Category" to="Screen_CreateProduct" method="_on_dd_category_item_selected"]
+[connection signal="pressed" from="Screen_CreateProduct/VBCCriacaoProduto/Btn_Create" to="Screen_CreateProduct" method="_on_btn_create_pressed"]
+[connection signal="pressed" from="Screen_CreateProduct/HBComponents/VBoxButtons/Btn_Add" to="Screen_CreateProduct" method="_on_btn_add_pressed"]
+[connection signal="pressed" from="Screen_CreateProduct/HBComponents/VBoxButtons/Btn_Remove" to="Screen_CreateProduct" method="_on_btn_remove_pressed"]
