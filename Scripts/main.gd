@@ -17,3 +17,5 @@ func show_create_product():
 func show_market():
 	screen_create_product.visible = false
 	screen_market.visible = true
+	screen_market.refresh_list()
+pass # Replace with function body.

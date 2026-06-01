@@ -5,6 +5,8 @@ var products = []
 const SAVE_PATH = "user://save_game.json"
 
 
+	
+
 func save_game():
 
 	var save_data = {
@@ -26,13 +28,18 @@ func load_game():
 		return
 
 	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
-
+	
+	if file == null:
+		print("Erro ao abrir save")
+		return
+		
 	var content = file.get_as_text()
 
 	file.close()
 
 	var data = JSON.parse_string(content)
-
+	
+	
 	if data != null:
 		products = data["products"]
 

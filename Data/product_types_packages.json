@@ -1,0 +1,150 @@
+{
+  "Refrigerante": {
+    "packages": {
+      "Lata":         ["269ml", "350ml", "473ml"],
+      "Garrafa PET":  ["350ml", "600ml", "1L", "1.5L", "2L"]
+    }
+  },
+  "Suco": {
+    "packages": {
+      "Garrafa PET":       ["350ml", "600ml", "1L", "1.5L", "2L"],
+      "Garrafa Vidro":     ["269ml", "350ml", "600ml", "750ml", "1L"],
+      "Caixa Longa Vida":  ["200ml", "1L"]
+    }
+  },
+  "Água": {
+    "packages": {
+      "Garrafa PET":   ["350ml", "600ml", "1L", "1.5L", "2L"],
+      "Garrafa Vidro": ["269ml", "350ml", "600ml", "750ml"]
+    }
+  },
+  "Energético": {
+    "packages": {
+      "Lata":        ["269ml", "350ml", "473ml"],
+      "Garrafa PET": ["350ml", "600ml"]
+    }
+  },
+  "Chá": {
+    "packages": {
+      "Garrafa PET":      ["350ml", "600ml", "1L", "1.5L"],
+      "Garrafa Vidro":    ["269ml", "350ml", "600ml"],
+      "Caixa Longa Vida": ["200ml", "1L"]
+    }
+  },
+  "Café": {
+    "packages": {
+      "Garrafa Vidro":    ["269ml", "350ml", "600ml"],
+      "Caixa Longa Vida": ["200ml", "1L"]
+    }
+  },
+  "Cerveja": {
+    "packages": {
+      "Lata":          ["269ml", "350ml", "473ml"],
+      "Garrafa Vidro": ["269ml", "350ml", "600ml", "750ml"],
+      "Barril":        ["10L", "30L", "50L"]
+    }
+  },
+  "Vinho": {
+    "packages": {
+      "Garrafa Vidro": ["350ml", "600ml", "750ml", "1L"]
+    }
+  },
+  "Whisky": {
+    "packages": {
+      "Garrafa Vidro": ["350ml", "600ml", "750ml", "1L"]
+    }
+  },
+  "Vodka": {
+    "packages": {
+      "Garrafa Vidro": ["350ml", "600ml", "750ml", "1L"]
+    }
+  },
+  "Licor": {
+    "packages": {
+      "Garrafa Vidro": ["269ml", "350ml", "600ml", "750ml"]
+    }
+  },
+  "Bolacha": {
+    "packages": {
+      "Pacote": ["100g", "250g", "500g"],
+      "Caixa":  ["100g", "250g", "500g"]
+    }
+  },
+  "Chocolate": {
+    "packages": {
+      "Caixa":  ["100g", "250g", "500g"],
+      "Pacote": ["100g", "250g"]
+    }
+  },
+  "Macarrão": {
+    "packages": {
+      "Pacote": ["250g", "500g", "1kg"],
+      "Caixa":  ["250g", "500g"]
+    }
+  },
+  "Arroz": {
+    "packages": {
+      "Pacote": ["500g", "1kg", "2kg", "5kg"],
+      "Saco":   ["1kg", "2kg", "5kg"]
+    }
+  },
+  "Feijão": {
+    "packages": {
+      "Pacote": ["500g", "1kg", "2kg"],
+      "Saco":   ["1kg", "2kg", "5kg"]
+    }
+  },
+  "Pão": {
+    "packages": {
+      "Pacote":  ["250g", "500g", "750g"],
+      "Bandeja": ["250g", "500g"]
+    }
+  },
+  "Bolo": {
+    "packages": {
+      "Caixa":   ["250g", "500g", "750g"],
+      "Bandeja": ["250g", "500g", "750g"]
+    }
+  },
+  "Pizza": {
+    "packages": {
+      "Caixa":   ["250g", "500g", "750g"],
+      "Bandeja": ["250g", "500g"]
+    }
+  },
+  "Sorvete": {
+    "packages": {
+      "Pote":    ["250g", "500g", "1kg", "2kg"],
+      "Bandeja": ["500g", "1kg"]
+    }
+  },
+  "Iogurte": {
+    "packages": {
+      "Pote":   ["100g", "250g", "500g"],
+      "Pacote": ["100g", "250g"]
+    }
+  },
+  "Queijo": {
+    "packages": {
+      "Pacote":  ["250g", "500g", "750g"],
+      "Bandeja": ["250g", "500g"]
+    }
+  },
+  "Hambúrguer": {
+    "packages": {
+      "Bandeja": ["250g", "500g"],
+      "Pacote":  ["250g", "500g"]
+    }
+  },
+  "Salgadinho": {
+    "packages": {
+      "Pacote": ["100g", "250g", "500g"]
+    }
+  },
+  "Cereal": {
+    "packages": {
+      "Caixa":  ["250g", "500g", "750g", "1kg"],
+      "Pacote": ["250g", "500g"]
+    }
+  }
+}

@@ -17,21 +17,24 @@
       "Lata",
       "Garrafa PET",
       "Garrafa Vidro",
-      "Caixa",
+      "Caixa Longa Vida",
       "Barril"
     ],
     "sizes": [
+      "200ml",
       "269ml",
       "350ml",
       "473ml",
       "600ml",
+      "750ml",
       "1L",
       "1.5L",
       "2L",
-      "5L"
+      "10L",
+      "30L",
+      "50L"
     ]
   },
-
   "Alimentos": {
     "types": [
       "Bolacha",
@@ -66,7 +69,6 @@
       "5kg"
     ]
   },
-
   "Tecnologia": {
     "types": [
       "Celular",
@@ -91,7 +93,6 @@
       "Grande"
     ]
   },
-
   "Moda": {
     "types": [
       "Camiseta",
@@ -120,7 +121,6 @@
       "XGG"
     ]
   },
-
   "Automotivo": {
     "types": [
       "Hatch",

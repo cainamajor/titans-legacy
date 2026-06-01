@@ -652,7 +652,6 @@ offset_bottom = 1080.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5tuhn")
 
 [node name="Screen_Market" type="Panel" parent="." unique_id=313509222]
-visible = false
 layout_mode = 0
 offset_left = 238.0
 offset_right = 1920.0
