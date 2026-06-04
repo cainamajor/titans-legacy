@@ -344,6 +344,18 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cfjnh"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.878, 0.878, 0.878, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8h1yq"]
 bg_color = Color(0.114, 0.114, 0.122, 1)
 corner_radius_top_left = 8
@@ -364,18 +376,6 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cfjnh"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.878, 0.878, 0.878, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mplfx"]
 bg_color = Color(1, 1, 1, 1)
@@ -466,7 +466,7 @@ theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
 
 [node name="Btn_CreateProduct" type="Button" parent="TopBar/VBoxContainer/Mg_CreateProduct" unique_id=190655823]
-custom_minimum_size = Vector2(225, 95)
+custom_minimum_size = Vector2(200, 95)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.114, 0.114, 0.122, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -479,26 +479,29 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_2gh4u")
 
 [node name="Panel" type="Panel" parent="TopBar/VBoxContainer/Mg_CreateProduct/Btn_CreateProduct" unique_id=1471994891]
 layout_mode = 0
-offset_right = 228.0
-offset_bottom = 95.0
+offset_left = 20.0
+offset_top = 7.0
+offset_right = 217.0
+offset_bottom = 75.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_devvj")
 
 [node name="TextureRect" type="TextureRect" parent="TopBar/VBoxContainer/Mg_CreateProduct/Btn_CreateProduct/Panel" unique_id=884374756]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 99.0
-offset_bottom = 92.0
+offset_left = 16.0
+offset_top = 5.0
+offset_right = 79.99999
+offset_bottom = 62.0
 mouse_filter = 2
 texture = ExtResource("2_fos0i")
 expand_mode = 3
 
 [node name="Label" type="Label" parent="TopBar/VBoxContainer/Mg_CreateProduct/Btn_CreateProduct/Panel" unique_id=1862194963]
 layout_mode = 0
-offset_left = 88.0
-offset_right = 225.0
-offset_bottom = 95.0
+offset_left = 89.0
+offset_top = 13.0
+offset_right = 193.0
+offset_bottom = 60.0
 theme_override_colors/font_color = Color(0.114, 0.114, 0.122, 1)
 theme_override_font_sizes/font_size = 14
 text = "Criar Produto"
@@ -1027,6 +1030,84 @@ theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.6155591
 theme_override_styles/normal = SubResource("StyleBoxFlat_gdb40")
 alignment = 1
 
+[node name="Panel" type="Panel" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=1955852024]
+custom_minimum_size = Vector2(0, 420)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cfjnh")
+
+[node name="MarginContainer" type="MarginContainer" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel" unique_id=1796457046]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer" unique_id=81664234]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LblEmpty" type="Label" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer" unique_id=1050255008]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43137255, 0.43137255, 0.4509804, 1)
+text = "Preencha os campos para ver o preview"
+
+[node name="LblPreviewName" type="Label" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer" unique_id=1581297168]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43137255, 0.43137255, 0.4509804, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="BadgeRow" type="HBoxContainer" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer" unique_id=1187585610]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblCategory" type="Label" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer/BadgeRow" unique_id=1624156437]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43137255, 0.43137255, 0.4509804, 1)
+
+[node name="LblType" type="Label" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer/BadgeRow" unique_id=1658094377]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43137255, 0.43137255, 0.4509804, 1)
+
+[node name="LblPackage" type="Label" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer/BadgeRow" unique_id=1739213124]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43137255, 0.43137255, 0.4509804, 1)
+
+[node name="LblSize" type="Label" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer/BadgeRow" unique_id=1085295363]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43137255, 0.43137255, 0.4509804, 1)
+
+[node name="LblComponents" type="Label" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer" unique_id=1798749889]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43137255, 0.43137255, 0.4509804, 1)
+autowrap_mode = 3
+
+[node name="RowCost" type="HBoxContainer" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer" unique_id=1525012058]
+layout_mode = 2
+
+[node name="LblCostLabel" type="Label" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer/RowCost" unique_id=101469117]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43137255, 0.43137255, 0.4509804, 1)
+text = "Custo estimado:"
+
+[node name="LblCostValue" type="Label" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer/RowCost" unique_id=1253130418]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43137255, 0.43137255, 0.4509804, 1)
+theme_override_font_sizes/font_size = 18
+
+[node name="RowQuality" type="HBoxContainer" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer" unique_id=1077988543]
+layout_mode = 2
+
+[node name="LblQualityLabel" type="Label" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer/RowQuality" unique_id=229255547]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43137255, 0.43137255, 0.4509804, 1)
+
+[node name="LblQualityValue" type="Label" parent="Screen_CreateProduct/VBCCriacaoProduto/Panel/MarginContainer/VBoxContainer/RowQuality" unique_id=1666636638]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43137255, 0.43137255, 0.4509804, 1)
+
 [node name="Btn_Create" type="Button" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=186333519]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -1039,28 +1120,20 @@ text = "Criar Produto"
 
 [node name="Label2" type="Label" parent="Screen_CreateProduct" unique_id=953977405]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 570.0
-offset_right = 442.0
-offset_bottom = 610.0
+offset_left = 23.0
+offset_top = 693.0
+offset_right = 441.0
+offset_bottom = 733.0
 theme_override_colors/font_color = Color(0.114, 0.114, 0.122, 1)
 theme_override_font_sizes/font_size = 25
 text = "Visualização conteúdo do produto:"
-
-[node name="Panel" type="Panel" parent="Screen_CreateProduct" unique_id=1955852024]
-layout_mode = 0
-offset_left = 34.0
-offset_top = 637.0
-offset_right = 1667.0
-offset_bottom = 1054.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_cfjnh")
 
 [node name="HBComponents" type="HBoxContainer" parent="Screen_CreateProduct" unique_id=927534154]
 layout_mode = 0
 offset_left = 438.0
 offset_top = 68.0
 offset_right = 1668.0
-offset_bottom = 558.0
+offset_bottom = 664.0
 
 [node name="VBoxAvailable" type="VBoxContainer" parent="Screen_CreateProduct/HBComponents" unique_id=1336569683]
 layout_mode = 2
