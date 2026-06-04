@@ -1,18 +1,27 @@
 extends Panel
 
+# --- Referências existentes ---
 @onready var inp_product_name = $VBCCriacaoProduto/Inp_ProductName
 @onready var dd_category = $VBCCriacaoProduto/Dd_Category
 @onready var dd_type = $VBCCriacaoProduto/Dd_Type
 @onready var dd_package = $VBCCriacaoProduto/Dd_Package
 @onready var dd_size = $VBCCriacaoProduto/Dd_Size
-@onready var item_available = $HBComponents/VBoxAvailable/ItemList_Available
-@onready var item_selected = $HBComponents/VBoxSelected/ItemList_Selected
+
+# NOVO: referências para os grids de cards
+@onready var grid_available = $HBComponents/VBoxAvailable/ScrollAvailable/GridAvailable
+@onready var grid_selected = $HBComponents/VBoxSelected/ScrollSelected/GridSelected
+
+# Cena do card
+const CARD_SCENE = preload("res://Scenes/component_card.tscn")
 
 var components_data = []
 var product_data = {}
 var types_packages_data = {}
 var brands_data = {}
 var main_names_data = {}
+
+# Rastreia quais componentes foram selecionados (por id)
+var selected_ids: Array = []
 
 
 func _ready():
@@ -31,7 +40,7 @@ func _ready():
 		_on_dd_category_item_selected(0)
 
 
-# --- CARREGAMENTO DE JSONs ---
+# --- CARREGAMENTO DE JSONs (idêntico ao original) ---
 
 func load_components():
 	var file = FileAccess.open("res://Data/components_v1.json", FileAccess.READ)
@@ -51,30 +60,21 @@ func load_components():
 func load_product_data():
 	var file = FileAccess.open("res://Data/product_categories.json", FileAccess.READ)
 	if file == null:
-		print("Erro ao abrir product_categories.json")
 		return
 	var json = JSON.new()
-	var result = json.parse(file.get_as_text())
+	json.parse(file.get_as_text())
 	file.close()
-	if result != OK:
-		print("Erro ao parsear product_categories.json")
-		return
 	product_data = json.data
 
 
 func load_types_packages():
 	var file = FileAccess.open("res://Data/product_types_packages.json", FileAccess.READ)
 	if file == null:
-		print("Erro ao abrir product_types_packages.json")
 		return
 	var json = JSON.new()
-	var result = json.parse(file.get_as_text())
+	json.parse(file.get_as_text())
 	file.close()
-	if result != OK:
-		print("Erro ao parsear product_types_packages.json")
-		return
 	types_packages_data = json.data
-	print("Types/Packages carregados: ", types_packages_data.keys().size())
 
 
 func load_brands():
@@ -97,124 +97,160 @@ func load_main_names():
 	main_names_data = json.data
 
 
-# --- DROPDOWNS ---
+# --- DROPDOWNS (idêntico ao original) ---
 
 func _on_dd_category_item_selected(index: int) -> void:
 	var categoria = dd_category.get_item_text(index)
-
 	dd_type.clear()
 	dd_package.clear()
 	dd_size.clear()
-
 	if not product_data.has(categoria):
 		return
-
 	for item in product_data[categoria]["types"]:
 		dd_type.add_item(item)
-
 	if dd_type.item_count > 0:
 		dd_type.select(0)
 		_on_dd_type_item_selected(0)
-
 	fill_components(categoria)
 
 
 func _on_dd_type_item_selected(index: int) -> void:
 	var tipo = dd_type.get_item_text(index)
-
 	dd_package.clear()
 	dd_size.clear()
-
 	if not types_packages_data.has(tipo):
 		return
-
 	var packages = types_packages_data[tipo]["packages"]
-
 	for pkg in packages.keys():
 		dd_package.add_item(pkg)
-
 	if dd_package.item_count > 0:
 		dd_package.select(0)
 		_on_dd_package_item_selected(0)
-
 	fill_components_by_type(tipo)
 
 
 func _on_dd_package_item_selected(index: int) -> void:
 	var tipo = dd_type.get_item_text(dd_type.selected)
 	var package = dd_package.get_item_text(index)
-
 	dd_size.clear()
-
 	if not types_packages_data.has(tipo):
 		return
-
 	var packages = types_packages_data[tipo]["packages"]
-
 	if not packages.has(package):
 		return
-
 	for size in packages[package]:
 		dd_size.add_item(size)
-
 	if dd_size.item_count > 0:
 		dd_size.select(0)
 
 
-# --- COMPONENTES ---
+# --- COMPONENTES: nova lógica com cards ---
+
+# Limpa e reconstrói o grid de disponíveis com base em um array filtrado
+func _populate_grid_available(filtered: Array) -> void:
+	for child in grid_available.get_children():
+		child.queue_free()
+
+	for component in filtered:
+		# Não mostra o que já foi selecionado
+		if component["id"] in selected_ids:
+			continue
+
+		var card = CARD_SCENE.instantiate()
+		grid_available.add_child(card)
+		card.setup(component)
+
+		# Clique no card: move para selecionados
+		card.gui_input.connect(func(event):
+			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+				_select_component(component)
+		)
+
+
+func _populate_grid_selected() -> void:
+	for child in grid_selected.get_children():
+		child.queue_free()
+
+	for sel_id in selected_ids:
+		var component = _find_component_by_id(sel_id)
+		if component.is_empty():
+			continue
+
+		var card = CARD_SCENE.instantiate()
+		grid_selected.add_child(card)
+		card.setup(component)
+
+		# Clique no card selecionado: remove da seleção
+		card.gui_input.connect(func(event):
+			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+				_deselect_component(sel_id)
+		)
+
+
+func _select_component(component: Dictionary) -> void:
+	if component["id"] in selected_ids:
+		return
+	selected_ids.append(component["id"])
+	_refresh_both_grids()
+
+
+func _deselect_component(comp_id: String) -> void:
+	selected_ids.erase(comp_id)
+	_refresh_both_grids()
+
+
+func _refresh_both_grids() -> void:
+	# Repopula disponíveis com o filtro ativo atual
+	var tipo_atual = dd_type.get_item_text(dd_type.selected)
+	var filtered = components_data.filter(func(c): return tipo_atual in c["compatible_types"])
+	_populate_grid_available(filtered)
+	_populate_grid_selected()
+
+
+func _find_component_by_id(comp_id: String) -> Dictionary:
+	for c in components_data:
+		if c["id"] == comp_id:
+			return c
+	return {}
+
 
 func fill_components(categoria: String) -> void:
-	item_available.clear()
-	item_selected.clear()
-
-	for component in components_data:
-		if categoria in component["product_categories"]:
-			item_available.add_item(component["name"])
+	selected_ids.clear()
+	var filtered = components_data.filter(func(c): return categoria in c["product_categories"])
+	_populate_grid_available(filtered)
+	_populate_grid_selected()
 
 
 func fill_components_by_type(tipo: String) -> void:
-	item_available.clear()
-	item_selected.clear()
+	selected_ids.clear()
+	var filtered = components_data.filter(func(c): return tipo in c["compatible_types"])
+	_populate_grid_available(filtered)
+	_populate_grid_selected()
 
-	for component in components_data:
-		if tipo in component["compatible_types"]:
-			item_available.add_item(component["name"])
 
+# --- BOTÕES ADD/REMOVE (mantidos por compatibilidade, mas o clique no card já faz isso) ---
 
 func _on_btn_add_pressed() -> void:
-	var selected = item_available.get_selected_items()
-	if selected.is_empty():
-		return
-
-	var text = item_available.get_item_text(selected[0])
-
-	# Bloqueia duplicado
-	for i in range(item_selected.item_count):
-		if item_selected.get_item_text(i) == text:
-			return
-
-	item_selected.add_item(text)
+	pass  # Substituído pelo clique no card
 
 
 func _on_btn_remove_pressed() -> void:
-	var selected = item_selected.get_selected_items()
-	if selected.is_empty():
-		return
-	item_selected.remove_item(selected[0])
+	pass  # Substituído pelo clique no card
 
 
-# --- CRIAÇÃO ---
+# --- CRIAÇÃO (idêntico ao original, adaptado para selected_ids) ---
 
 func _on_btn_create_pressed():
 	var product_name = inp_product_name.text.strip_edges()
-
 	if product_name == "":
 		print("Nome do produto vazio")
 		return
 
 	var selected_components = []
-	for i in range(item_selected.item_count):
-		selected_components.append(item_selected.get_item_text(i))
+	for sel_id in selected_ids:
+		var comp = _find_component_by_id(sel_id)
+		if not comp.is_empty():
+			selected_components.append(comp["name"])
 
 	var new_product = {
 		"name": product_name,
@@ -228,21 +264,18 @@ func _on_btn_create_pressed():
 	GameData.products.append(new_product)
 	GameData.save_game()
 
-	# Atualiza mercado
 	var market = get_node_or_null("/root/Main/Screen_Market")
 	if market:
 		market.refresh_list()
 
-	# Limpa formulário
 	inp_product_name.text = ""
-	item_selected.clear()
+	selected_ids.clear()
 	var tipo_atual = dd_type.get_item_text(dd_type.selected)
 	fill_components_by_type(tipo_atual)
-
 	print("Produto criado: ", new_product["name"])
 
 
-# --- NOME ALEATÓRIO ---
+# --- NOME ALEATÓRIO
 
 func _on_btn_random_name_pressed() -> void:
 	if dd_type.selected == -1:

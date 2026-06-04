@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c5mr7kam8etig"]
 
 [ext_resource type="Script" uid="uid://dw77icwc7h8w6" path="res://Scripts/create_product.gd" id="1_glv2v"]
+[ext_resource type="FontFile" uid="uid://b13nmvcmi4e14" path="res://Assets/Fonts/DMSans-Regular.ttf" id="1_j4qnp"]
 [ext_resource type="Script" uid="uid://b6drurppmp4m0" path="res://Scripts/main.gd" id="1_r0du0"]
 [ext_resource type="Texture2D" uid="uid://c0tutr1388wpq" path="res://Icons/product-idea.png" id="2_fos0i"]
 [ext_resource type="Script" uid="uid://dp6rl816jeesy" path="res://Scripts/market_screen.gd" id="2_uu6xs"]
@@ -15,11 +16,18 @@
 [ext_resource type="Texture2D" uid="uid://dmso5u8qx26op" path="res://Icons/quality-check.png" id="10_c6i3y"]
 [ext_resource type="Texture2D" uid="uid://ckwle2k8ll006" path="res://Icons/components.png" id="13_c2ibq"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fos0i"]
-bg_color = Color(0.09019608, 0.09019608, 0.12941177, 1)
+[sub_resource type="Theme" id="Theme_fpfj3"]
+default_font = ExtResource("1_j4qnp")
+default_font_size = 13
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3b0ty"]
+bg_color = Color(1, 1, 1, 1)
+border_width_bottom = 1
+border_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6i3y"]
-bg_color = Color(0.09019608, 0.10980392, 0.12941177, 1)
+bg_color = Color(0.9607843, 0.9607843, 0.96862745, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2ibq"]
 bg_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
@@ -29,6 +37,12 @@ draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4qnp"]
 bg_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2gh4u"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_devvj"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tuhn"]
 bg_color = Color(0.09019608, 0.10980392, 0.12941177, 1)
@@ -46,13 +60,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_fpfj3")
 script = ExtResource("1_r0du0")
 
 [node name="TopBar" type="Panel" parent="." unique_id=1325316843]
 layout_mode = 0
 offset_right = 238.0
 offset_bottom = 1080.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fos0i")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3b0ty")
 
 [node name="BannerLogo" type="Panel" parent="TopBar" unique_id=2044645616]
 layout_mode = 0
@@ -73,7 +88,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_top = 73.0
 offset_right = 238.0
-offset_bottom = 1095.0
+offset_bottom = 1075.0
 theme_override_constants/separation = 5
 
 [node name="Mg_CreateProduct" type="MarginContainer" parent="TopBar/VBoxContainer" unique_id=417478452]
@@ -108,7 +123,7 @@ layout_mode = 0
 offset_left = 88.0
 offset_right = 225.0
 offset_bottom = 95.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Criar Produto"
 horizontal_alignment = 1
@@ -145,7 +160,7 @@ layout_mode = 0
 offset_left = 87.0
 offset_right = 224.0
 offset_bottom = 94.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Produto"
 horizontal_alignment = 1
@@ -182,7 +197,7 @@ layout_mode = 0
 offset_left = 87.0
 offset_right = 224.0
 offset_bottom = 94.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Mercado"
 horizontal_alignment = 1
@@ -219,7 +234,7 @@ layout_mode = 0
 offset_left = 87.0
 offset_right = 224.0
 offset_bottom = 94.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Marca"
 horizontal_alignment = 1
@@ -256,7 +271,7 @@ layout_mode = 0
 offset_left = 87.0
 offset_right = 224.0
 offset_bottom = 94.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Produção"
 horizontal_alignment = 1
@@ -293,7 +308,7 @@ layout_mode = 0
 offset_left = 87.0
 offset_right = 224.0
 offset_bottom = 94.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Marketing"
 horizontal_alignment = 1
@@ -330,7 +345,7 @@ layout_mode = 0
 offset_left = 87.0
 offset_right = 224.0
 offset_bottom = 94.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Logística"
 horizontal_alignment = 1
@@ -367,7 +382,7 @@ layout_mode = 0
 offset_left = 87.0
 offset_right = 224.0
 offset_bottom = 94.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Estoque"
 horizontal_alignment = 1
@@ -404,7 +419,7 @@ layout_mode = 0
 offset_left = 87.0
 offset_right = 224.0
 offset_bottom = 94.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Qualidade"
 horizontal_alignment = 1
@@ -441,7 +456,7 @@ layout_mode = 0
 offset_left = 87.0
 offset_right = 224.0
 offset_bottom = 94.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Pesquisa"
 horizontal_alignment = 1
@@ -455,12 +470,22 @@ offset_bottom = 1080.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_c6i3y")
 script = ExtResource("1_glv2v")
 
+[node name="Label3" type="Label" parent="Screen_CreateProduct" unique_id=390267808]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 36.0
+offset_right = 655.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(0.11372549, 0.11372549, 0.12156863, 1)
+theme_override_font_sizes/font_size = 20
+text = "Componentes:"
+
 [node name="Mg_Components" type="MarginContainer" parent="Screen_CreateProduct" unique_id=2051953907]
 layout_mode = 0
-offset_left = 65.0
-offset_top = 333.0
-offset_right = 303.0
-offset_bottom = 428.0
+offset_left = -239.0
+offset_top = -226.0
+offset_right = -1.0
+offset_bottom = -131.0
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
 
@@ -490,7 +515,7 @@ layout_mode = 0
 offset_left = 95.0
 offset_right = 228.0
 offset_bottom = 94.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Ingredientes 
 e 
@@ -500,23 +525,24 @@ vertical_alignment = 1
 
 [node name="Label" type="Label" parent="Screen_CreateProduct" unique_id=2087315564]
 layout_mode = 0
-offset_left = 36.0
-offset_top = 11.0
-offset_right = 290.0
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
-theme_override_font_sizes/font_size = 25
+offset_left = 24.0
+offset_top = 36.0
+offset_right = 278.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0.11372549, 0.11372549, 0.12156863, 1)
+theme_override_font_sizes/font_size = 20
 text = "Criação de Produtos"
 
 [node name="VBCCriacaoProduto" type="VBoxContainer" parent="Screen_CreateProduct" unique_id=819876814]
 layout_mode = 1
-offset_left = 36.0
-offset_top = 68.0
-offset_right = 326.0
-offset_bottom = 321.0
+offset_left = 24.0
+offset_top = 95.0
+offset_right = 403.0
+offset_bottom = 322.0
 
 [node name="Inp_ProductName" type="LineEdit" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=398394918]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_c2ibq")
 placeholder_text = "Nome do produto"
@@ -524,124 +550,109 @@ alignment = 1
 
 [node name="Btn_RandomName" type="Button" parent="Screen_CreateProduct/VBCCriacaoProduto/Inp_ProductName" unique_id=1953169779]
 layout_mode = 1
-offset_left = 290.0
-offset_right = 322.0
+offset_left = 378.0
+offset_right = 410.0
 offset_bottom = 31.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_kjvhd")
 text = "🎲"
 
 [node name="Dd_Category" type="OptionButton" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=1872447727]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_c2ibq")
 alignment = 1
 
 [node name="Dd_Type" type="OptionButton" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=166691076]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_c2ibq")
 alignment = 1
 
 [node name="Dd_Package" type="OptionButton" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=515855060]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_c2ibq")
 alignment = 1
 
 [node name="Dd_Size" type="OptionButton" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=247323795]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_c2ibq")
 alignment = 1
 
 [node name="Btn_Create" type="Button" parent="Screen_CreateProduct/VBCCriacaoProduto" unique_id=186333519]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.9085239, 0.5671783, 0.61555916, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_j4qnp")
 text = "Criar Produto"
 
 [node name="Label2" type="Label" parent="Screen_CreateProduct" unique_id=953977405]
 layout_mode = 0
-offset_left = 492.0
-offset_top = 11.0
-offset_right = 746.0
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+offset_left = 24.0
+offset_top = 570.0
+offset_right = 442.0
+offset_bottom = 610.0
+theme_override_colors/font_color = Color(0.11372549, 0.11372549, 0.12156863, 1)
 theme_override_font_sizes/font_size = 25
 text = "Visualização conteúdo do produto:"
 
-[node name="Panel3" type="Panel" parent="Screen_CreateProduct" unique_id=855847090]
-layout_mode = 0
-offset_left = 1083.0
-offset_top = 68.0
-offset_right = 1644.0
-offset_bottom = 428.0
-
 [node name="Panel" type="Panel" parent="Screen_CreateProduct" unique_id=1955852024]
 layout_mode = 0
-offset_left = 370.0
-offset_top = 68.0
-offset_right = 1050.0
-offset_bottom = 428.0
-
-[node name="Label3" type="Label" parent="Screen_CreateProduct" unique_id=390267808]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 467.0
-offset_right = 344.0
-offset_bottom = 507.0
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
-theme_override_font_sizes/font_size = 25
-text = "Ingredientes/Compostos:"
+offset_left = 34.0
+offset_top = 637.0
+offset_right = 1640.0
+offset_bottom = 1054.0
 
 [node name="HBComponents" type="HBoxContainer" parent="Screen_CreateProduct" unique_id=927534154]
 layout_mode = 0
-offset_left = 36.0
-offset_top = 573.0
-offset_right = 356.0
-offset_bottom = 800.0
+offset_left = 438.0
+offset_top = 68.0
+offset_right = 1638.0
+offset_bottom = 558.0
 
 [node name="VBoxAvailable" type="VBoxContainer" parent="Screen_CreateProduct/HBComponents" unique_id=1336569683]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Lbl_Available" type="Label" parent="Screen_CreateProduct/HBComponents/VBoxAvailable" unique_id=2094886310]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
-text = "Disponível"
+theme_override_colors/font_color = Color(0.11372549, 0.11372549, 0.12156863, 1)
+text = "Disponíveis:"
 horizontal_alignment = 1
 
-[node name="ItemList_Available" type="ItemList" parent="Screen_CreateProduct/HBComponents/VBoxAvailable" unique_id=1533371901]
-custom_minimum_size = Vector2(750, 450)
+[node name="ScrollAvailable" type="ScrollContainer" parent="Screen_CreateProduct/HBComponents/VBoxAvailable" unique_id=713272869]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2gh4u")
 
-[node name="VBoxButtons" type="VBoxContainer" parent="Screen_CreateProduct/HBComponents" unique_id=415888581]
+[node name="GridAvailable" type="GridContainer" parent="Screen_CreateProduct/HBComponents/VBoxAvailable/ScrollAvailable" unique_id=1085202554]
 layout_mode = 2
-alignment = 1
-
-[node name="Btn_Add" type="Button" parent="Screen_CreateProduct/HBComponents/VBoxButtons" unique_id=1243058614]
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-text = "+"
-
-[node name="Btn_Remove" type="Button" parent="Screen_CreateProduct/HBComponents/VBoxButtons" unique_id=769467510]
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-text = "-"
+columns = 2
 
 [node name="VBoxSelected" type="VBoxContainer" parent="Screen_CreateProduct/HBComponents" unique_id=1909216359]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Lbl_Selected" type="Label" parent="Screen_CreateProduct/HBComponents/VBoxSelected" unique_id=1054289563]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
-text = "Selecionado"
+theme_override_colors/font_color = Color(0.11372549, 0.11372549, 0.12156863, 1)
+text = "Selecionados:"
 horizontal_alignment = 1
 
-[node name="ItemList_Selected" type="ItemList" parent="Screen_CreateProduct/HBComponents/VBoxSelected" unique_id=721264027]
-custom_minimum_size = Vector2(750, 450)
+[node name="ScrollSelected" type="ScrollContainer" parent="Screen_CreateProduct/HBComponents/VBoxSelected" unique_id=1111466070]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.63529414, 0.6627451, 0.58431375, 1)
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_devvj")
+
+[node name="GridSelected" type="GridContainer" parent="Screen_CreateProduct/HBComponents/VBoxSelected/ScrollSelected" unique_id=681692098]
+layout_mode = 2
+columns = 2
 
 [node name="Screen_Components" type="Panel" parent="." unique_id=1860502143]
 visible = false
@@ -677,7 +688,5 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_sc1dx")
 [connection signal="pressed" from="Screen_CreateProduct/VBCCriacaoProduto/Inp_ProductName/Btn_RandomName" to="Screen_CreateProduct" method="_on_btn_random_name_pressed"]
 [connection signal="item_selected" from="Screen_CreateProduct/VBCCriacaoProduto/Dd_Category" to="Screen_CreateProduct" method="_on_dd_category_item_selected"]
 [connection signal="pressed" from="Screen_CreateProduct/VBCCriacaoProduto/Btn_Create" to="Screen_CreateProduct" method="_on_btn_create_pressed"]
-[connection signal="pressed" from="Screen_CreateProduct/HBComponents/VBoxButtons/Btn_Add" to="Screen_CreateProduct" method="_on_btn_add_pressed"]
-[connection signal="pressed" from="Screen_CreateProduct/HBComponents/VBoxButtons/Btn_Remove" to="Screen_CreateProduct" method="_on_btn_remove_pressed"]
 [connection signal="ready" from="Screen_Market" to="Screen_Market" method="refresh_list"]
 [connection signal="ready" from="Screen_Market/VBoxContainer/ProductList" to="Screen_Market" method="_ready"]
