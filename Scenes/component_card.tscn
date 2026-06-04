@@ -2,34 +2,86 @@
 
 [ext_resource type="Script" uid="uid://bdg21383mpvad" path="res://Scripts/component_card.gd" id="1_odema"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_luv5n"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.878431, 0.878431, 0.878431, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icon"]
+bg_color = Color(0.941176, 0.937255, 0.933333, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge"]
+bg_color = Color(0.941176, 0.937255, 0.933333, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="ComponentCard" type="PanelContainer" unique_id=1851079748]
-custom_minimum_size = Vector2(200, 100)
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_luv5n")
+custom_minimum_size = Vector2(300, 64)
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
 script = ExtResource("1_odema")
 
-[node name="VBox" type="VBoxContainer" parent="." unique_id=1236712281]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=677991688]
 layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="ImagePlaceholder" type="ColorRect" parent="VBox" unique_id=103245206]
-custom_minimum_size = Vector2(0, 40)
+[node name="HBox" type="HBoxContainer" parent="MarginContainer" unique_id=1840906771]
 layout_mode = 2
-color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+theme_override_constants/separation = 8
 
-[node name="Name" type="Label" parent="VBox" unique_id=1236743666]
+[node name="IconBox" type="Panel" parent="MarginContainer/HBox" unique_id=345192417]
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
-horizontal_alignment = 3
-autowrap_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_icon")
 
-[node name="Company" type="Label" parent="VBox" unique_id=297746537]
+[node name="Info" type="VBoxContainer" parent="MarginContainer/HBox" unique_id=1900657191]
 layout_mode = 2
-horizontal_alignment = 3
-autowrap_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 2
 
-[node name="Type" type="Label" parent="VBox" unique_id=498641956]
+[node name="LabelName" type="Label" parent="MarginContainer/HBox/Info" unique_id=317558831]
 layout_mode = 2
-horizontal_alignment = 3
-autowrap_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.113725, 0.113725, 0.121569, 1)
+theme_override_font_sizes/font_size = 12
+text = "Nome"
+text_overrun_behavior = 3
+
+[node name="LabelCompany" type="Label" parent="MarginContainer/HBox/Info" unique_id=649547265]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.431373, 0.431373, 0.45098, 1)
+theme_override_font_sizes/font_size = 10
+text = "Empresa"
+text_overrun_behavior = 3
+
+[node name="TypeBadge" type="PanelContainer" parent="MarginContainer/HBox" unique_id=585335963]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge")
+
+[node name="LabelType" type="Label" parent="MarginContainer/HBox/TypeBadge" unique_id=1294611433]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.373, 0.369, 0.353, 1)
+theme_override_font_sizes/font_size = 10
+text = "Tipo"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
