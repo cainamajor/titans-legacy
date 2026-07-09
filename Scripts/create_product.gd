@@ -1,43 +1,55 @@
 extends Panel
 
-# --- Referências existentes ---
 @onready var inp_product_name = $VBCCriacaoProduto/Inp_ProductName
 @onready var dd_category      = $VBCCriacaoProduto/Dd_Category
 @onready var dd_type          = $VBCCriacaoProduto/Dd_Type
 @onready var dd_package       = $VBCCriacaoProduto/Dd_Package
 @onready var dd_size          = $VBCCriacaoProduto/Dd_Size
 
-@onready var grid_available = $HBComponents/VBoxAvailable/ScrollAvailable/GridAvailable
-@onready var grid_selected  = $HBComponents/VBoxSelected/ScrollSelected/GridSelected
+@onready var grid_available = $VBoxComponents/VBoxAvailable/ScrollAvailable/GridAvailable
+@onready var grid_selected  = $VBoxComponents/VBoxSelected/ScrollSelected/GridSelected
 
-# --- Referências do painel de preview ---
-# Estes nós devem existir dentro do Panel "Visualização conteúdo do produto"
-# Veja o guia de nós abaixo para criar no editor
-@onready var preview_panel        = $Panel
-@onready var preview_name       = $Panel/MarginContainer/VBoxContainer/LblPreviewName
-@onready var preview_category   = $Panel/MarginContainer/VBoxContainer/BadgeRow/LblCategory
-@onready var preview_type       = $Panel/MarginContainer/VBoxContainer/BadgeRow/LblType
-@onready var preview_package    = $Panel/MarginContainer/VBoxContainer/BadgeRow/LblPackage
-@onready var preview_size       = $Panel/MarginContainer/VBoxContainer/BadgeRow/LblSize
-@onready var preview_components = $Panel/MarginContainer/VBoxContainer/LblComponents
-@onready var preview_cost       = $Panel/MarginContainer/VBoxContainer/RowCost/LblCostValue
-@onready var preview_quality    = $Panel/MarginContainer/VBoxContainer/RowQuality/LblQualityValue
-@onready var preview_empty      = $Panel/MarginContainer/VBoxContainer/LblEmpty
+# Preview
+@onready var preview_name       = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/LblPreviewName
+@onready var preview_category   = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/BadgeRow/LblCategory
+@onready var preview_type       = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/BadgeRow/LblType
+@onready var preview_package    = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/BadgeRow/LblPackage
+@onready var preview_size       = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/BadgeRow/LblSize
+@onready var preview_components = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/LblComponents
+@onready var preview_cost       = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/RowCost/LblCostValue
+@onready var preview_quality    = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/RowQuality/LblQualityValue
+@onready var preview_empty      = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/LblEmpty
+
+# Slider de preço — adiciona estes nós dentro do VBoxContainer do preview:
+# HSlider  (nome: SliderPrice)
+# Label    (nome: LblPriceValue)
+# Label    (nome: LblMargemValue)
+# Label    (nome: LblVendaEstimada)
+@onready var slider_price       = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/SliderPrice
+@onready var lbl_price_value    = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/LblPriceValue
+@onready var lbl_margem         = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/LblMargemValue
+@onready var lbl_venda          = $VBCCriacaoProduto/VBoxPreview/MarginContainer/VBoxContainer/LblVendaEstimada
 
 const CARD_SCENE = preload("res://Scenes/component_card.tscn")
 
-var components_data    = []
-var product_data       = {}
-var types_packages_data = {}
-var brands_data        = {}
-var main_names_data    = {}
-var selected_ids: Array = []
+var components_data      = []
+var product_data         = {}
+var types_packages_data  = {}
+var brands_data          = {}
+var main_names_data      = {}
+var price_reference_data = {}
 
-# Cores para badges
-const COR_BADGE_BG   := Color(0.918, 0.953, 0.871, 1.0)
-const COR_BADGE_TEXT := Color(0.231, 0.427, 0.067, 1.0)
-const COR_CUSTO_TEXT := Color(0.114, 0.114, 0.122, 1.0)
-const COR_MUTED      := Color(0.431, 0.431, 0.451, 1.0)
+var selected_base:  Dictionary = {}
+var selected_sabor: Dictionary = {}
+
+# Preço atual definido pelo slider
+var preco_venda: float = 0.0
+
+const COR_TEXTO_ESCURO := Color(0.114, 0.114, 0.122, 1.0)
+const COR_MUTED        := Color(0.431, 0.431, 0.451, 1.0)
+const COR_VERDE        := Color(0.118, 0.620, 0.459, 1.0)
+const COR_AMARELO      := Color(0.855, 0.647, 0.125, 1.0)
+const COR_VERMELHO     := Color(0.820, 0.188, 0.188, 1.0)
 
 
 func _ready():
@@ -46,6 +58,7 @@ func _ready():
 	load_types_packages()
 	load_brands()
 	load_main_names()
+	load_price_reference()
 
 	dd_category.clear()
 	for categoria in product_data.keys():
@@ -54,29 +67,26 @@ func _ready():
 		dd_category.select(0)
 		_on_dd_category_item_selected(0)
 
-	# Conecta o campo de nome para atualizar preview ao digitar
 	inp_product_name.text_changed.connect(_on_name_changed)
 
+	await get_tree().process_frame
+
+	# Conecta o slider se existir
+	if slider_price:
+		slider_price.value_changed.connect(_on_slider_price_changed)
+
 	_update_preview()
-	print("preview_name: ", preview_name)
-	print("preview_cost: ", preview_cost)
-	print("preview_empty: ", preview_empty)
-	print("Filhos de Screen_CreateProduct:")
-	for child in get_children():
-		print("  ", child.name, " (", child.get_class(), ")")
-# --- CARREGAMENTO DE JSONs ---
+
+
+# --- CARREGAMENTO ---
 
 func load_components():
 	var file = FileAccess.open("res://Data/components_v1.json", FileAccess.READ)
 	if file == null:
-		print("Erro ao abrir components_v1.json")
 		return
 	var json = JSON.new()
-	var result = json.parse(file.get_as_text())
+	json.parse(file.get_as_text())
 	file.close()
-	if result != OK:
-		print("Erro ao parsear components_v1.json")
-		return
 	components_data = json.data
 	print("Components carregados: ", components_data.size())
 
@@ -116,6 +126,15 @@ func load_main_names():
 	file.close()
 	main_names_data = json.data
 
+func load_price_reference():
+	var file = FileAccess.open("res://Data/price_reference.json", FileAccess.READ)
+	if file == null:
+		return
+	var json = JSON.new()
+	json.parse(file.get_as_text())
+	file.close()
+	price_reference_data = json.data
+
 
 # --- DROPDOWNS ---
 
@@ -131,7 +150,6 @@ func _on_dd_category_item_selected(index: int) -> void:
 	if dd_type.item_count > 0:
 		dd_type.select(0)
 		_on_dd_type_item_selected(0)
-	fill_components(categoria)
 	_update_preview()
 
 func _on_dd_type_item_selected(index: int) -> void:
@@ -146,7 +164,10 @@ func _on_dd_type_item_selected(index: int) -> void:
 	if dd_package.item_count > 0:
 		dd_package.select(0)
 		_on_dd_package_item_selected(0)
+	selected_base  = {}
+	selected_sabor = {}
 	fill_components_by_type(tipo)
+	_update_price_slider()
 	_update_preview()
 
 func _on_dd_package_item_selected(index: int) -> void:
@@ -167,53 +188,84 @@ func _on_dd_package_item_selected(index: int) -> void:
 
 # --- COMPONENTES ---
 
-func _populate_grid_available(filtered: Array) -> void:
+func fill_components_by_type(tipo: String) -> void:
+	selected_base  = {}
+	selected_sabor = {}
+	var bases   = components_data.filter(func(c): return c["slot"] == "base"  and tipo in c["product_types"])
+	var sabores = components_data.filter(func(c): return c["slot"] == "sabor" and tipo in c["product_types"])
+	_populate_grids(bases, sabores)
+
+func _populate_grids(bases: Array, sabores: Array) -> void:
 	for child in grid_available.get_children():
 		child.queue_free()
-	for component in filtered:
-		if component["id"] in selected_ids:
+	for child in grid_selected.get_children():
+		child.queue_free()
+
+	for comp in bases:
+		if selected_base.get("id","") == comp["id"]:
 			continue
 		var card = CARD_SCENE.instantiate()
 		grid_available.add_child(card)
-		card.setup(component)
+		card.setup(comp)
 		card.gui_input.connect(func(event):
 			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-				_select_component(component)
+				_select(comp, "base")
 		)
 
-func _populate_grid_selected() -> void:
-	for child in grid_selected.get_children():
-		child.queue_free()
-	for sel_id in selected_ids:
-		var component = _find_component_by_id(sel_id)
-		if component.is_empty():
+	for comp in sabores:
+		if selected_sabor.get("id","") == comp["id"]:
 			continue
 		var card = CARD_SCENE.instantiate()
+		grid_available.add_child(card)
+		card.setup(comp)
+		card.gui_input.connect(func(event):
+			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+				_select(comp, "sabor")
+		)
+
+	if not selected_base.is_empty():
+		var card = CARD_SCENE.instantiate()
 		grid_selected.add_child(card)
-		card.setup(component)
+		card.setup(selected_base)
 		card.set_selected(true)
 		card.gui_input.connect(func(event):
 			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-				_deselect_component(sel_id)
+				_deselect("base")
 		)
 
-func _select_component(component: Dictionary) -> void:
-	if component["id"] in selected_ids:
-		return
-	selected_ids.append(component["id"])
-	_refresh_both_grids()
+	if not selected_sabor.is_empty():
+		var card = CARD_SCENE.instantiate()
+		grid_selected.add_child(card)
+		card.setup(selected_sabor)
+		card.set_selected(true)
+		card.gui_input.connect(func(event):
+			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+				_deselect("sabor")
+		)
+
+func _select(comp: Dictionary, slot: String) -> void:
+	if slot == "base":
+		selected_base = comp
+	else:
+		selected_sabor = comp
+	_refresh_grids()
+	_update_price_slider()
 	_update_preview()
 
-func _deselect_component(comp_id: String) -> void:
-	selected_ids.erase(comp_id)
-	_refresh_both_grids()
+func _deselect(slot: String) -> void:
+	if slot == "base":
+		selected_base = {}
+	else:
+		selected_sabor = {}
+	_refresh_grids()
+	_update_price_slider()
 	_update_preview()
 
-func _refresh_both_grids() -> void:
-	var tipo_atual = dd_type.get_item_text(dd_type.selected)
-	var filtered   = components_data.filter(func(c): return tipo_atual in c["compatible_types"])
-	_populate_grid_available(filtered)
-	_populate_grid_selected()
+func _refresh_grids() -> void:
+	var tipo    = dd_type.get_item_text(dd_type.selected)
+	var bases   = components_data.filter(func(c): return c["slot"] == "base"  and tipo in c["product_types"])
+	var sabores = components_data.filter(func(c): return c["slot"] == "sabor" and tipo in c["product_types"])
+	_populate_grids(bases, sabores)
 
 func _find_component_by_id(comp_id: String) -> Dictionary:
 	for c in components_data:
@@ -221,27 +273,101 @@ func _find_component_by_id(comp_id: String) -> Dictionary:
 			return c
 	return {}
 
-func fill_components(categoria: String) -> void:
-	selected_ids.clear()
-	var filtered = components_data.filter(func(c): return categoria in c["product_categories"])
-	_populate_grid_available(filtered)
-	_populate_grid_selected()
 
-func fill_components_by_type(tipo: String) -> void:
-	selected_ids.clear()
-	var filtered = components_data.filter(func(c): return tipo in c["compatible_types"])
-	_populate_grid_available(filtered)
-	_populate_grid_selected()
+# --- SLIDER DE PREÇO ---
+
+func _get_custo_total() -> float:
+	return selected_base.get("base_cost", 0.0) + selected_sabor.get("base_cost", 0.0)
+
+func _get_qualidade_media() -> float:
+	if selected_base.is_empty():
+		return 50.0
+	var q_base  = float(selected_base.get("quality", 50))
+	var q_sabor = float(selected_sabor.get("quality", 50)) if not selected_sabor.is_empty() else q_base
+	return (q_base + q_sabor) / (2.0 if not selected_sabor.is_empty() else 1.0)
+
+func _get_preco_ideal() -> float:
+	# Preço ideal = referência da categoria ajustado pela qualidade
+	# Qualidade 100 = teto_qualidade, qualidade 50 = preco_atacado_ref
+	var tipo = dd_type.get_item_text(dd_type.selected) if dd_type.selected >= 0 else ""
+	if not price_reference_data.has(tipo):
+		return _get_custo_total() * 2.0
+	var ref     = price_reference_data[tipo]
+	var base    = float(ref["preco_atacado_ref"])
+	var teto    = float(ref["teto_qualidade"])
+	var quality = _get_qualidade_media() / 100.0
+	# Interpola entre base e teto conforme qualidade
+	return base + (teto - base) * quality
+
+func _update_price_slider() -> void:
+	if not slider_price:
+		return
+	var custo = _get_custo_total()
+	var ideal = _get_preco_ideal()
+	var teto  = ideal * 2.0  # teto do slider = 2x o preço ideal
+
+	slider_price.min_value = custo
+	slider_price.max_value = max(teto, custo * 3.0)
+	slider_price.step      = 0.05
+
+	# Posiciona o slider no preço ideal por padrão
+	slider_price.value = ideal
+	preco_venda = ideal
+
+func _on_slider_price_changed(value: float) -> void:
+	preco_venda = value
+	_update_price_feedback()
+
+func _update_price_feedback() -> void:
+	var custo = _get_custo_total()
+	var ideal = _get_preco_ideal()
+
+	if lbl_price_value:
+		lbl_price_value.text = "R$ %.2f" % preco_venda
+
+	# Margem %
+	var margem_pct := 0.0
+	if custo > 0:
+		margem_pct = ((preco_venda - custo) / custo) * 100.0
+
+	if lbl_margem:
+		lbl_margem.text = "Margem: %.0f%%" % margem_pct
+		if preco_venda <= ideal:
+			lbl_margem.add_theme_color_override("font_color", COR_VERDE)
+		elif preco_venda <= ideal * 1.3:
+			lbl_margem.add_theme_color_override("font_color", COR_AMARELO)
+		else:
+			lbl_margem.add_theme_color_override("font_color", COR_VERMELHO)
+
+	# Estimativa de venda
+	if lbl_venda:
+		var visibilidade := 0.1  # começa baixa, cresce com marketing futuro
+		var fator_preco: float = clamp(ideal / max(preco_venda, 0.01), 0.1, 1.0)		
+		var fator_qual   := _get_qualidade_media() / 100.0
+		var vendas_est   := int(100 * fator_preco * fator_qual * (1.0 + visibilidade))
+
+		var texto_venda := ""
+		var cor_venda   := COR_VERDE
+		if vendas_est >= 70:
+			texto_venda = "Venda estimada: Alta (%d un/dia)" % vendas_est
+			cor_venda   = COR_VERDE
+		elif vendas_est >= 30:
+			texto_venda = "Venda estimada: Média (%d un/dia)" % vendas_est
+			cor_venda   = COR_AMARELO
+		else:
+			texto_venda = "Venda estimada: Baixa (%d un/dia)" % vendas_est
+			cor_venda   = COR_VERMELHO
+
+		lbl_venda.text = texto_venda
+		lbl_venda.add_theme_color_override("font_color", cor_venda)
 
 
-# --- PREVIEW DO PRODUTO ---
-# Atualiza o painel de visualização em tempo real
+# --- PREVIEW ---
 
-func _on_name_changed(_new_text: String) -> void:
+func _on_name_changed(_text: String) -> void:
 	_update_preview()
 
 func _update_preview() -> void:
-	# Verifica se os nós do preview existem
 	if not preview_name:
 		return
 
@@ -250,92 +376,70 @@ func _update_preview() -> void:
 	var tipo      = dd_type.get_item_text(dd_type.selected) if dd_type.selected >= 0 else ""
 	var embalagem = dd_package.get_item_text(dd_package.selected) if dd_package.selected >= 0 else ""
 	var tamanho   = dd_size.get_item_text(dd_size.selected) if dd_size.selected >= 0 else ""
+	var tem_dados = nome != "" or not selected_base.is_empty()
 
-	var tem_dados = nome != "" or selected_ids.size() > 0
-
-	# Mostra/esconde estado vazio
 	if preview_empty:
 		preview_empty.visible = not tem_dados
 
-	# Nome do produto
 	preview_name.text = nome if nome != "" else "Sem nome"
-	preview_name.add_theme_color_override("font_color",
-		COR_CUSTO_TEXT if nome != "" else COR_MUTED)
+	preview_name.autowrap_mode = TextServer.AUTOWRAP_WORD
+	preview_name.add_theme_color_override("font_color", COR_TEXTO_ESCURO if nome != "" else COR_MUTED)
 
-	# Badges de categoria/tipo/embalagem/tamanho
-	if preview_category:
-		preview_category.text = categoria
-	if preview_type:
-		preview_type.text = tipo
-	if preview_package:
-		preview_package.text = embalagem
-	if preview_size:
-		preview_size.text = tamanho
+	if preview_category: preview_category.text = categoria
+	if preview_type:     preview_type.text     = tipo
+	if preview_package:  preview_package.text  = embalagem
+	if preview_size:     preview_size.text     = tamanho
 
-	# Lista de componentes selecionados
 	if preview_components:
-		if selected_ids.is_empty():
+		var linhas = []
+		if not selected_base.is_empty():
+			linhas.append("Base: " + selected_base.get("name","") + " — " + selected_base.get("company",""))
+		if not selected_sabor.is_empty():
+			linhas.append("Sabor: " + selected_sabor.get("name","") + " — " + selected_sabor.get("company",""))
+		if linhas.is_empty():
 			preview_components.text = "Nenhum componente selecionado"
 			preview_components.add_theme_color_override("font_color", COR_MUTED)
 		else:
-			var linhas = []
-			for sel_id in selected_ids:
-				var comp = _find_component_by_id(sel_id)
-				if not comp.is_empty():
-					linhas.append("• " + comp["name"])
 			preview_components.text = "\n".join(linhas)
-			preview_components.add_theme_color_override("font_color", COR_CUSTO_TEXT)
+			preview_components.add_theme_color_override("font_color", COR_TEXTO_ESCURO)
 
-	# Custo estimado (soma de base_cost dos selecionados)
 	if preview_cost:
-		var custo_total := 0.0
-		for sel_id in selected_ids:
-			var comp = _find_component_by_id(sel_id)
-			if not comp.is_empty():
-				custo_total += float(comp.get("base_cost", 0.0))
-		preview_cost.text = "R$ %.2f" % custo_total
+		var custo = _get_custo_total()
+		preview_cost.text = "R$ %.2f" % custo
 
-	# Qualidade média dos componentes selecionados
 	if preview_quality:
-		if selected_ids.is_empty():
+		if selected_base.is_empty():
 			preview_quality.text = "—"
 		else:
-			var soma_qualidade := 0.0
-			for sel_id in selected_ids:
-				var comp = _find_component_by_id(sel_id)
-				if not comp.is_empty():
-					soma_qualidade += float(comp.get("quality", 50.0))
-			var media = soma_qualidade / selected_ids.size()
-			preview_quality.text = "%d / 100" % int(media)
+			preview_quality.text = "%d / 100" % int(_get_qualidade_media())
+
+	_update_price_feedback()
 
 
-# --- BOTÕES ---
-
-func _on_btn_add_pressed() -> void:
-	pass
-
-func _on_btn_remove_pressed() -> void:
-	pass
+# --- CRIAÇÃO ---
 
 func _on_btn_create_pressed():
 	var product_name = inp_product_name.text.strip_edges()
 	if product_name == "":
-		print("Nome do produto vazio")
+		print("Nome vazio")
+		return
+	if selected_base.is_empty():
+		print("Selecione um componente base")
 		return
 
-	var selected_components = []
-	for sel_id in selected_ids:
-		var comp = _find_component_by_id(sel_id)
-		if not comp.is_empty():
-			selected_components.append(comp["name"])
-
 	var new_product = {
-		"name":       product_name,
-		"category":   dd_category.get_item_text(dd_category.selected),
-		"type":       dd_type.get_item_text(dd_type.selected),
-		"package":    dd_package.get_item_text(dd_package.selected),
-		"size":       dd_size.get_item_text(dd_size.selected),
-		"components": selected_components
+		"name":          product_name,
+		"category":      dd_category.get_item_text(dd_category.selected),
+		"type":          dd_type.get_item_text(dd_type.selected),
+		"package":       dd_package.get_item_text(dd_package.selected),
+		"size":          dd_size.get_item_text(dd_size.selected),
+		"base":          selected_base.get("name",""),
+		"base_company":  selected_base.get("company",""),
+		"sabor":         selected_sabor.get("name",""),
+		"sabor_company": selected_sabor.get("company",""),
+		"cost":          _get_custo_total(),
+		"quality":       int(_get_qualidade_media()),
+		"price":         preco_venda
 	}
 
 	GameData.products.append(new_product)
@@ -346,13 +450,18 @@ func _on_btn_create_pressed():
 		market.refresh_list()
 
 	inp_product_name.text = ""
-	selected_ids.clear()
-
+	selected_base  = {}
+	selected_sabor = {}
 	var tipo_atual = dd_type.get_item_text(dd_type.selected)
 	fill_components_by_type(tipo_atual)
 	_update_preview()
-
 	print("Produto criado: ", new_product["name"])
+
+func _on_btn_add_pressed() -> void:
+	pass
+
+func _on_btn_remove_pressed() -> void:
+	pass
 
 func _on_btn_random_name_pressed() -> void:
 	if dd_type.selected == -1:
